@@ -55,7 +55,7 @@ int tl_delay(lua_State *l)
 {
 	if (lua_gettop(l) >= 0)
 	{
-		time_delay = (int) lua_tonumber(l, -1);
+		time_delay = (int) lua_tonumber(l, 1);
 	}
 	return 0;
 }
@@ -65,7 +65,7 @@ int tl_fd(lua_State *l)
 	double length;
 	if (lua_gettop(l) >= 0)
 	{
-		length = lua_tonumber(l, -1);
+		length = lua_tonumber(l, 1);
 		set_point(turtle.oldpos, turtle.circle.x, turtle.circle.y);
 		turtle.circle.x += t_cos(turtle.angle) * length;
 		turtle.circle.y += t_sin(turtle.angle) * length;
@@ -81,8 +81,8 @@ int tl_tr(lua_State *l)
 	double old_angle = turtle.angle;
 	if (lua_gettop(l) >= 0)
 	{
-		if (lua_isnumber(l, -1))
-			turtle.angle += lua_tonumber(l, -1);
+		if (lua_isnumber(l, 1))
+			turtle.angle += lua_tonumber(l, 1);
 	}
 	t_Process(turtle.angle - old_angle);
 	return 0;
@@ -103,43 +103,43 @@ int tl_pendown(lua_State *l)
 int tl_growto(lua_State *l)
 {
 	int old_size = turtle.circle.r;
-	if (lua_gettop(l) >= 0 && lua_isnumber(l, -1))
-			turtle.circle.r = lua_tonumber(l, -1);
+	if (lua_gettop(l) >= 0 && lua_isnumber(l, 1))
+			turtle.circle.r = lua_tonumber(l, 1);
 	t_Process(turtle.circle.r - old_size);
 	return 0;
 }
 
 int tl_setpencolor(lua_State *l)
 {
-	if (lua_gettop(l) >= 0 && lua_isnumber(l, -1))
-			turtle.writingcolor = lua_tonumber(l, -1);
+	if (lua_gettop(l) >= 0 && lua_isnumber(l, 1))
+			turtle.writingcolor = lua_tonumber(l, 1);
 	return 0;
 }
 
 int tl_moveto(lua_State *l)
 {
-	if(lua_gettop(l) >= 1 && lua_isnumber(l, -1) && lua_isnumber(l, -2))
+	if(lua_gettop(l) >= 1 && lua_isnumber(l, 1) && lua_isnumber(l, 2))
 	{
-			turtle.circle.x = lua_tonumber(l, -2);
-			turtle.circle.y = lua_tonumber(l, -1);
+			turtle.circle.x = lua_tonumber(l, 1);
+			turtle.circle.y = lua_tonumber(l, 2);
 	}
 	return 0;
 }
 
 int tl_move(lua_State *l)
 {
-	if(lua_gettop(l) >= 1 && lua_isnumber(l, -1) && lua_isnumber(l, -2))
+	if(lua_gettop(l) >= 1 && lua_isnumber(l, 1) && lua_isnumber(l, 2))
 	{
-			turtle.circle.x += lua_tonumber(l, -2);
-			turtle.circle.y += lua_tonumber(l, -1);
+			turtle.circle.x += lua_tonumber(l, 1);
+			turtle.circle.y += lua_tonumber(l, 2);
 	}
 	return 0;
 }
 
 int tl_turnto(lua_State *l)
 {
-	if(lua_gettop(l) >= 1 && lua_isnumber(l, -1))
-			turtle.angle = lua_tonumber(l, -1);
+	if(lua_gettop(l) >= 1 && lua_isnumber(l, 1))
+			turtle.angle = lua_tonumber(l, 1);
 	return 0;
 }
 
